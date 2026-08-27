@@ -1,0 +1,27 @@
+# deps
+node_modules/
+
+# wrangler
+.wrangler/
+dist/
+
+# generated types (run `npm run cf-typegen`)
+worker-configuration.d.ts
+
+# env / secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# logs
+*.log
+
+# misc
+.DS_Store

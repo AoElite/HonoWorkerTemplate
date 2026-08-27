@@ -1,0 +1,33 @@
+{
+  "name": "hono-worker-template",
+  "version": "0.1.0",
+  "description": "A minimal, type-safe Cloudflare Workers starter built with Hono and Effect",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "predeploy": "npm run cf-typegen",
+    "deploy": "wrangler deploy --minify",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p test",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "postinstall": "npm run cf-typegen"
+  },
+  "dependencies": {
+    "effect": "^4.0.0-rc.112",
+    "hono": "^4.13.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.10",
+    "@cloudflare/vitest-plugin": "^1.1.0",
+    "@types/node": "^26.4.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.126.0"
+  }
+}

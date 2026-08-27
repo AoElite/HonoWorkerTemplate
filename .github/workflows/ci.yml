@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    name: Lint, typecheck & test
+    # Trigger filters can't use expressions, so gate on the repository's
+    # default branch here instead of hardcoding a branch name.
+    if: >-
+      (github.event_name == 'push' &&
+        github.ref_name == github.event.repository.default_branch) ||
+      (github.event_name == 'pull_request' &&
+        github.event.pull_request.base.ref == github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
