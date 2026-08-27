@@ -8,6 +8,8 @@ A minimal starter template for building [Cloudflare Workers](https://developers.
 - TypeScript with strict mode
 - [Wrangler](https://developers.cloudflare.com/workers/wrangler/) for local dev and deploys
 - Generated binding types via `wrangler types` (`CloudflareBindings`)
+- Testing with [Vitest](https://vitest.dev/) and [`@cloudflare/vitest-plugin`](https://developers.cloudflare.com/workers/testing/vitest-integration/) — tests run inside the actual Workers runtime
+- Environment variable setup with a committed [`.env.example`](./.env.example)
 - Request logging middleware and a `/health` endpoint as starting points
 
 ## Prerequisites
@@ -30,8 +32,22 @@ The Worker is served at http://localhost:8787.
 | -------------------- | ------------------------------------------------------------------ |
 | `npm run dev`        | Run the Worker locally with Wrangler                               |
 | `npm run deploy`     | Deploy the Worker to Cloudflare (minified)                         |
-| `npm run typecheck`  | Type-check the project with `tsc`                                  |
+| `npm test`           | Run tests once with Vitest                                         |
+| `npm run test:watch` | Run tests in watch mode                                            |
+| `npm run typecheck`  | Type-check the app and tests with `tsc`                            |
 | `npm run cf-typegen` | Regenerate `worker-configuration.d.ts` from `wrangler.jsonc`       |
+
+## Testing
+
+Tests live in [`test/`](./test) and run inside the Workers runtime (workerd) via [`@cloudflare/vitest-plugin`](https://developers.cloudflare.com/workers/testing/vitest-integration/), so runtime APIs and bindings behave exactly as they do in production:
+
+```ts
+import { exports } from 'cloudflare:workers'
+
+const res = await exports.default.fetch('https://example.com/')
+```
+
+`exports.default.fetch()` dispatches a request to the Worker's default export — see [`test/index.spec.ts`](./test/index.spec.ts). Bindings are available in tests via `import { env } from 'cloudflare:workers'`, and helpers like `createExecutionContext()` for unit tests come from `cloudflare:test`.
 
 ## Bindings
 
@@ -54,9 +70,18 @@ app.get('/example', (c) => {
 
 Types are also generated automatically after `npm install` (via the `postinstall` script).
 
-## Secrets
+## Environment variables & secrets
 
-For local development, put secrets in a `.dev.vars` file (gitignored). For production, use:
+For local development, copy the example file and fill in your values:
+
+```sh
+cp .env.example .env
+npm run cf-typegen
+```
+
+`wrangler dev` loads `.env` (gitignored) automatically and exposes the values on `c.env`. Re-running `cf-typegen` keeps the `CloudflareBindings` interface in sync with the variables you define, so they are fully typed. (`.dev.vars` is also supported — use one or the other, not both.)
+
+Non-secret configuration belongs in the `vars` section of `wrangler.jsonc`. For production secrets, use:
 
 ```sh
 npx wrangler secret put SECRET_NAME
