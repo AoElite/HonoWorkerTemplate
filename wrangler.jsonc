@@ -1,0 +1,44 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hono-worker-template",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-25",
+  "observability": {
+    "enabled": true
+  }
+
+  // Uncomment and configure the bindings you need, then run `npm run cf-typegen`
+  // to regenerate `worker-configuration.d.ts` (the `CloudflareBindings` interface).
+  //
+  // "compatibility_flags": ["nodejs_compat"],
+  //
+  // "vars": {
+  //   "MY_VAR": "my-value"
+  // },
+  //
+  // "kv_namespaces": [
+  //   {
+  //     "binding": "MY_KV_NAMESPACE",
+  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  //   }
+  // ],
+  //
+  // "r2_buckets": [
+  //   {
+  //     "binding": "MY_BUCKET",
+  //     "bucket_name": "my-bucket"
+  //   }
+  // ],
+  //
+  // "d1_databases": [
+  //   {
+  //     "binding": "MY_DB",
+  //     "database_name": "my-database",
+  //     "database_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  //   }
+  // ],
+  //
+  // "ai": {
+  //   "binding": "AI"
+  // }
+}
