@@ -5,16 +5,18 @@
   "compatibility_date": "2026-08-25",
   "observability": {
     "enabled": true
+  },
+
+  // Non-secret configuration with deployed defaults. Values can be overridden
+  // locally with a `.env` file (see `.env.example`).
+  "vars": {
+    "API_MOTD": "Hello world!"
   }
 
   // Uncomment and configure the bindings you need, then run `npm run cf-typegen`
   // to regenerate `worker-configuration.d.ts` (the `CloudflareBindings` interface).
   //
   // "compatibility_flags": ["nodejs_compat"],
-  //
-  // "vars": {
-  //   "MY_VAR": "my-value"
-  // },
   //
   // "kv_namespaces": [
   //   {
