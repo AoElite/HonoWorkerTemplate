@@ -1,10 +1,10 @@
-import { cloudflareTest } from '@cloudflare/vitest-plugin'
-import { defineConfig } from 'vitest/config'
+import { cloudflareTest } from "@cloudflare/vitest-plugin";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [
     cloudflareTest({
-      wrangler: { configPath: './wrangler.jsonc' },
+      wrangler: { configPath: "./wrangler.jsonc" },
     }),
   ],
   test: {
@@ -12,4 +12,4 @@ export default defineConfig({
     // inside workerd; keep headroom for cold starts on slower CI runners.
     testTimeout: 15000,
   },
-})
+});

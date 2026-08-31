@@ -25,3 +25,7 @@ worker-configuration.d.ts
 
 # misc
 .DS_Store
+
+# wrangler runtime caches (written when XDG dirs are unavailable)
+node-compile-cache/
+update-check/

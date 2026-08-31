@@ -1,0 +1,7 @@
+# Dependencies allowed to run install/postinstall scripts (pnpm blocks all
+# others by default). esbuild and workerd need theirs to set up platform
+# binaries; msgpackr-extract is left blocked — it only builds an optional
+# native accelerator.
+onlyBuiltDependencies:
+  - esbuild
+  - workerd

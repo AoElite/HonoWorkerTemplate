@@ -13,7 +13,7 @@ Keep this Hono + TypeScript + Cloudflare Workers project maintainable, reusable,
 - Validate all external input with Effect Schema, including body, query, params, and relevant headers.
 - Keep validation close to the endpoint it protects.
 - Keep status codes and response shapes consistent.
-- Follow Biome and TypeScript rules; do not bypass checks without justification.
+- Follow oxlint, oxfmt, and TypeScript rules; do not bypass checks without justification.
 - Preserve Cloudflare Workers compatibility.
 - Update tests when behavior changes.
 - Run project checks before finishing.

@@ -4,14 +4,14 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-08-25",
   "observability": {
-    "enabled": true
+    "enabled": true,
   },
 
   // Non-secret configuration with deployed defaults. Values can be overridden
   // locally with a `.env` file (see `.env.example`).
   "vars": {
-    "API_MOTD": "Hello world!"
-  }
+    "API_MOTD": "Hello world!",
+  },
 
   // Node.js compatibility is enabled by default at this compatibility date
   // (2026-08-04 or later); add "compatibility_flags": ["no_nodejs_compat"]
